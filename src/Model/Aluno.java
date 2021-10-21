@@ -18,8 +18,17 @@ public class Aluno {
         this.nome = nome;
     }
 
+    
     public Aluno(){
         
+    }
+    
+    public Aluno(String nome){
+        this.nome = nome;
+    }
+    
+    public Aluno(int codigo){
+        this.codigo = codigo;
     }
     
     public int getCodigo() {
