@@ -43,11 +43,8 @@ public class ControllerAluno {
         return alDAO.buscaTodosAlunos();
     }
     
-    public boolean verificaId(int id) throws SQLException, ClassNotFoundException{
+    public ArrayList<Aluno> verificaId(int id) throws SQLException, ClassNotFoundException{
         AlunoDAO alDAO = new AlunoDAO();
-        boolean existe = false;
-        
-        existe = alDAO.verificaId(id);
-        return existe;
+        return alDAO.verificaId(id);
     }
 }

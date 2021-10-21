@@ -80,8 +80,8 @@ public class AlunoDAO {
         return excluiu;
     }
     
-    public boolean verificaId(int id) throws SQLException, ClassNotFoundException{
-        boolean existe = false;
+    public ArrayList<Aluno> verificaId(int id) throws SQLException, ClassNotFoundException{
+        ArrayList<Aluno> aluno = new ArrayList();
         ResultSet rs = null;
         try{
             con = new Conexao().getConnection();
@@ -89,8 +89,11 @@ public class AlunoDAO {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
-            if(rs.next()){
-                existe = true;
+            while(rs.next()){
+                String nome = rs.getString("nome");
+                
+                Aluno al = new Aluno(nome);
+                aluno.add(al);
             }
             stmt.close();
         }
@@ -101,7 +104,7 @@ public class AlunoDAO {
             con.close();
         }
         
-        return existe;
+        return aluno;
     }
     
     public ArrayList<Aluno> buscaTodosAlunos() throws SQLException, ClassNotFoundException{

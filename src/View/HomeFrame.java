@@ -103,11 +103,13 @@ public class HomeFrame extends javax.swing.JFrame {
     private void btnAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlunosActionPerformed
         AlunoFrame alFrame = new AlunoFrame();
         alFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnAlunosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CursoFrame cursoFrame = new CursoFrame();
         cursoFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
