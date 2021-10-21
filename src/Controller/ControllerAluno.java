@@ -23,7 +23,7 @@ public class ControllerAluno {
         return inseriu;
     }
     
-    public boolean excluiuVeiculo(int idAluno) throws SQLException, ClassNotFoundException{
+    public boolean excluiuAluno(int idAluno) throws SQLException, ClassNotFoundException{
         Aluno al = new Aluno(idAluno);
         AlunoDAO alDAO = new AlunoDAO();
         boolean excluiu = alDAO.excluir(al);

@@ -22,6 +22,15 @@ public class Curso {
 
     public Curso(){}
     
+    public Curso(String descricao, String ementa){
+        this.descricao = descricao;
+        this.ementa = ementa;
+    }
+
+    public Curso(int idCurso) {
+        this.codigo = idCurso;
+    }
+    
     public int getCodigo() {
         return codigo;
     }

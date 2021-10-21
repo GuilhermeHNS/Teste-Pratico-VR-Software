@@ -376,15 +376,13 @@ public class AlunoFrame extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ArrayList<Aluno> resultAluno = new ArrayList();
         if(txtIDAluno.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Digite o Id do aluno!");
+            JOptionPane.showMessageDialog(null, "Digite o codigo do aluno!");
         }
         else{
             int idAluno = Integer.parseInt(txtIDAluno.getText());
             try {
                 resultAluno = ctrlAl.verificaId(idAluno);
-            } catch (SQLException ex) {
-                Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -416,7 +414,7 @@ public class AlunoFrame extends javax.swing.JFrame {
         if(resposta == 0){
             System.out.println("Aceitou excluir o aluno");
             try {
-                excluiu = ctrlAl.excluiuVeiculo(codigoAluno);
+                excluiu = ctrlAl.excluiuAluno(codigoAluno);
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -431,6 +429,7 @@ public class AlunoFrame extends javax.swing.JFrame {
                 btnAlterar.setVisible(false);
                 btnExcluir.setVisible(false);
                 txtIDAluno.setText("");
+                labelNomeAluno.setVisible(false);
         }
         
     }//GEN-LAST:event_btnExcluirActionPerformed
