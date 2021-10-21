@@ -60,6 +60,7 @@ public class AlunoFrame extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         labelNovoNome = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,8 +141,18 @@ public class AlunoFrame extends javax.swing.JFrame {
         labelNome.setText("Nome:");
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         labelNovoNome.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         labelNovoNome.setText("Digite o novo nome");
@@ -205,6 +216,19 @@ public class AlunoFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Alterar Dados", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 705, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 434, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Listagem de Alunos", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,8 +297,70 @@ public class AlunoFrame extends javax.swing.JFrame {
                 btnExcluir.setVisible(true);
                 
             }
+            else{
+                JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
+                txtIDAluno.setText("");
+            }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir o aluno?");
+        boolean excluiu = false;
+        if(resposta == 0){
+            System.out.println("Aceitou excluir o aluno");
+            try {
+                excluiu = ctrlAl.excluiuVeiculo(codigoAluno);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(excluiu)
+                JOptionPane.showMessageDialog(null, "Aluno excluido com sucesso!");
+                txtAlterarNome.setVisible(false);
+                labelNovoNome.setVisible(false);
+                labelNome.setVisible(false);
+                btnAlterar.setVisible(false);
+                btnExcluir.setVisible(false);
+                txtIDAluno.setText("");
+        }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        if(txtAlterarNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Digite o novo nome que o aluno irá receber!");
+        }
+        else{
+            int resposta = JOptionPane.showConfirmDialog(this, "Deseja alterar o nome do Aluno?");
+            if(resposta == 0){
+                boolean alterou = false;
+                String novoNome = txtAlterarNome.getText();
+                try{
+                    alterou = ctrlAl.alterarDados(codigoAluno, novoNome);
+                }
+                catch(SQLException ex){
+                    Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                catch(ClassNotFoundException ex){
+                    Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                if(alterou){
+                    JOptionPane.showMessageDialog(null, "Nome alterado com sucesso!");
+                    txtAlterarNome.setVisible(false);
+                    labelNovoNome.setVisible(false);
+                    labelNome.setVisible(false);
+                    btnAlterar.setVisible(false);
+                    btnExcluir.setVisible(false);
+                    txtIDAluno.setText("");
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,6 +409,7 @@ public class AlunoFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelNovoNome;
