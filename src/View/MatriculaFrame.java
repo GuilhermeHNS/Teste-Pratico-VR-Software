@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * View de Matricula
  * @author guilh
  */
 public class MatriculaFrame extends javax.swing.JFrame {
@@ -47,20 +47,24 @@ public class MatriculaFrame extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         txtIdAluno = new javax.swing.JTextField();
         txtIdCurso = new javax.swing.JTextField();
+        btnVoltaMenu = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtIdMatricula = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnBuscaId = new javax.swing.JButton();
         labelMatriculaEncontrada = new javax.swing.JLabel();
         btnExcluir = new javax.swing.JButton();
+        btnVoltaMenu2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaMatriculas = new javax.swing.JTable();
         btnListaMatriculas = new javax.swing.JButton();
+        btnVoltaMenu3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel1.setText("Cadastro");
@@ -75,6 +79,13 @@ public class MatriculaFrame extends javax.swing.JFrame {
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        btnVoltaMenu.setText("Voltar para o menu");
+        btnVoltaMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltaMenuActionPerformed(evt);
             }
         });
 
@@ -96,14 +107,21 @@ public class MatriculaFrame extends javax.swing.JFrame {
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(249, 249, 249))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(277, 277, 277)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltaMenu)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addContainerGap()
+                .addComponent(btnVoltaMenu)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -126,10 +144,10 @@ public class MatriculaFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel5.setText("Digite o ID da turma");
 
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscaId.setText("Buscar");
+        btnBuscaId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBuscaIdActionPerformed(evt);
             }
         });
 
@@ -139,6 +157,13 @@ public class MatriculaFrame extends javax.swing.JFrame {
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnVoltaMenu2.setText("Voltar para o menu");
+        btnVoltaMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltaMenu2ActionPerformed(evt);
             }
         });
 
@@ -153,27 +178,32 @@ public class MatriculaFrame extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtIdMatricula)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscaId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(jLabel4))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(314, 314, 314)
-                        .addComponent(labelMatriculaEncontrada)))
+                        .addComponent(labelMatriculaEncontrada))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltaMenu2)))
                 .addContainerGap(226, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addContainerGap()
+                .addComponent(btnVoltaMenu2)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtIdMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnBuscaId)
                 .addGap(4, 4, 4)
                 .addComponent(btnExcluir)
                 .addGap(18, 18, 18)
@@ -214,6 +244,13 @@ public class MatriculaFrame extends javax.swing.JFrame {
             }
         });
 
+        btnVoltaMenu3.setText("Voltar para o menu");
+        btnVoltaMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltaMenu3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -221,7 +258,9 @@ public class MatriculaFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(275, 275, 275)
+                        .addContainerGap()
+                        .addComponent(btnVoltaMenu3)
+                        .addGap(192, 192, 192)
                         .addComponent(jLabel8))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(128, 128, 128)
@@ -234,8 +273,13 @@ public class MatriculaFrame extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVoltaMenu3)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -260,115 +304,175 @@ public class MatriculaFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Evento de click do botão que requisita ao Controller o cadastro de uma Matricula
+     * @param evt 
+     */
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if(txtIdAluno.getText().isEmpty() || txtIdCurso.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todas as informações");
-        }
+        } //Verificação do campo para caso ele esteja vazio
         else{
+            //Inicialização das variaveis
             int idAluno = Integer.parseInt(txtIdAluno.getText());
             int idCurso = Integer.parseInt(txtIdCurso.getText());
             boolean existe = false;
             boolean estaCadastrado = false;
             boolean cadastrou = false;
+            
+            
             try {
-                existe = ctrlCa.verificaAlunoECurso(idAluno, idCurso);
-                estaCadastrado = ctrlCa.verificaSeEstaCadastrado(idAluno, idCurso);
+                existe = ctrlCa.verificaAlunoECurso(idAluno, idCurso); //Requisita ao controller a verificação da existencia do Aluno e do Curso
+                estaCadastrado = ctrlCa.verificaSeEstaCadastrado(idAluno, idCurso); //Requisita ao controller a verificação da existencia de um cadastro de Matricula
             }catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(MatriculaFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+            //Verifica se o resultado foi verdadeiro para a existencia do Aluno e do Curso
             if(existe){
+                //Verifica se o resultado foi falso para a existencia de um cadastro de matricula
                 if (!estaCadastrado) {
                     try {
-                        cadastrou = ctrlCa.insereCursoAluno(idAluno, idCurso);
+                        cadastrou = ctrlCa.insereCursoAluno(idAluno, idCurso); //Requisita ao controller o cadastro de uma matricula
                     } catch (SQLException | ClassNotFoundException ex) {
                         Logger.getLogger(MatriculaFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Aluno ja matriculado!");
+                    JOptionPane.showMessageDialog(null, "Aluno ja matriculado!"); //Exibe uma mensagem ao usuario de que ja existe um Aluno com esse id matriculado
                 }
             }
             else{
-                JOptionPane.showMessageDialog(null, "Aluno ou Curso não existe em nossa base de dados");
+                JOptionPane.showMessageDialog(null, "Aluno ou Curso não existe em nossa base de dados"); //Exibe uma mensagem ao usuario de que o Aluno ou o Curso não existe no banco de dados
             }
+            
+            //Verifica se o resultado foi verdadeiro para o cadastro da matricula
             if(cadastrou){
-                JOptionPane.showMessageDialog(null, "Cadastrado efetuado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Cadastrado efetuado com sucesso!"); //Exibe uma mensagem ao usuario de que o cadastro foi efetuado com sucesso
                 txtIdAluno.setText("");
                 txtIdCurso.setText("");
             }
             else{
-                JOptionPane.showMessageDialog(null, "Falha no cadastro");
+                JOptionPane.showMessageDialog(null, "Falha no cadastro"); //Exibe uma mensagem ao usuario de que houve uma falha no cadastro
                 txtIdAluno.setText("");
                 txtIdCurso.setText("");
             }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+     * Evento de click do botão que requisita ao controller a verificação da existencia de uma Matricula
+     * @param evt 
+     */
+    private void btnBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaIdActionPerformed
         if(txtIdMatricula.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Digite o ID da matricula");
-        }
+        }//Verificação do campo para caso ele esteja vazio
         else{
+            //Atribuição das variaveis
             int idCursoAluno = Integer.parseInt(txtIdMatricula.getText());
             boolean existe = false;
             
             try {
-                existe = ctrlCa.verificaId(idCursoAluno);
+                existe = ctrlCa.verificaId(idCursoAluno); //Requisita ao controller a verificação
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(MatriculaFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+            //Verifica se o resultado da requisição foi verdadeiro
             if(existe){
                 labelMatriculaEncontrada.setText("Matricula encontrada!");
                 btnExcluir.setVisible(true);
                 idMatricula = idCursoAluno;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Matricula não encontrada!");
+                JOptionPane.showMessageDialog(null, "Matricula não encontrada!"); //Exibe uma mensagem ao usuario de que a matricula não foi encontrada
                 txtIdMatricula.setText("");
             }
             
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnBuscaIdActionPerformed
 
+    /**
+     * Evento de click do botão que requisita a exclusão de uma matricula
+     * @param evt 
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir esta matricula?");
+        
+        //Inicialização das variaveis
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir esta matricula?"); //Atribui a resposta do usuario
         boolean excluiu = false;
         
+        //Verificação da resposta do usuario
         if(resposta == 0){
             try {
-                excluiu = ctrlCa.excluiuCursoAluno(idMatricula);
+                excluiu = ctrlCa.excluiuCursoAluno(idMatricula); //Requisita ao controller a exclusão da matricula
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(MatriculaFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
+        //Verifica se o resultado da requisição foi verdadeira
         if(excluiu){
-            JOptionPane.showMessageDialog(null, "Matricula excluida com sucesso!");
+            JOptionPane.showMessageDialog(null, "Matricula excluida com sucesso!");//Exibe uma mensagem ao usuario de que a matricula foi excluida com sucesso
             btnExcluir.setVisible(false);
             labelMatriculaEncontrada.setText("");
             txtIdMatricula.setText("");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    /**
+     * Evento de click do botão que requisita ao controller a listagem das matriculas
+     * @param evt 
+     */
     private void btnListaMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaMatriculasActionPerformed
-        ArrayList<CursoAluno> listaMatriculas;
+        ArrayList<CursoAluno> listaMatriculas;//Inicialização do ArrayList
         
         try {
-            listaMatriculas = ctrlCa.listar();
-            DefaultTableModel dados = (DefaultTableModel) tabelaMatriculas.getModel();
+            listaMatriculas = ctrlCa.listar();//Requisição da listagem
+            DefaultTableModel dados = (DefaultTableModel) tabelaMatriculas.getModel();//Inicialização da tabela
             dados.setNumRows(0);
             
+            //Varredura do ArrayList atribuindo a Classe CursoAluno
             for(CursoAluno ca: listaMatriculas){
-                dados.addRow(new Object[]{ca.getCodigo(), ca.getCodigoAluno(), ca.getCodigoCurso()});
+                dados.addRow(new Object[]{ca.getCodigo(), ca.getCodigoAluno(), ca.getCodigoCurso()}); //Adicionando as linhas e colunas da tabela os dados retornados
             }
            
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(MatriculaFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnListaMatriculasActionPerformed
+
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
+    private void btnVoltaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenuActionPerformed
+        HomeFrame homeFrame = new HomeFrame();
+        homeFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVoltaMenuActionPerformed
+    
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
+    private void btnVoltaMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenu2ActionPerformed
+        HomeFrame homeFrame = new HomeFrame();
+        homeFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVoltaMenu2ActionPerformed
+
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
+    private void btnVoltaMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenu3ActionPerformed
+        HomeFrame homeFrame = new HomeFrame();
+        homeFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVoltaMenu3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,10 +517,13 @@ public class MatriculaFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscaId;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnListaMatriculas;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnVoltaMenu;
+    private javax.swing.JButton btnVoltaMenu2;
+    private javax.swing.JButton btnVoltaMenu3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

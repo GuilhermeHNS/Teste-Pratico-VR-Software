@@ -6,7 +6,7 @@
 package View;
 
 /**
- *
+ * View home
  * @author guilh
  */
 public class HomeFrame extends javax.swing.JFrame {
@@ -30,19 +30,20 @@ public class HomeFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCursos = new javax.swing.JButton();
         btnAlunos = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnMatriculas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel1.setText("Bem Vindo(a)!");
 
-        jButton1.setText("Cursos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCursos.setText("Cursos");
+        btnCursos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCursosActionPerformed(evt);
             }
         });
 
@@ -53,10 +54,10 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Turmas");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnMatriculas.setText("Matriculas");
+        btnMatriculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnMatriculasActionPerformed(evt);
             }
         });
 
@@ -73,8 +74,8 @@ public class HomeFrame extends javax.swing.JFrame {
                         .addGap(217, 217, 217)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnMatriculas, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(203, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -83,11 +84,11 @@ public class HomeFrame extends javax.swing.JFrame {
                 .addGap(69, 69, 69)
                 .addComponent(jLabel1)
                 .addGap(39, 39, 39)
-                .addComponent(jButton1)
+                .addComponent(btnCursos)
                 .addGap(18, 18, 18)
                 .addComponent(btnAlunos)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnMatriculas)
                 .addContainerGap(162, Short.MAX_VALUE))
         );
 
@@ -105,23 +106,35 @@ public class HomeFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evendo de click do botão que redireciona para a pagina de Alunos
+     * @param evt 
+     */
     private void btnAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlunosActionPerformed
         AlunoFrame alFrame = new AlunoFrame();
         alFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAlunosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+     * Evendo de click do botão que redireciona para a pagina de Cursos
+     * @param evt 
+     */
+    private void btnCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCursosActionPerformed
         CursoFrame cursoFrame = new CursoFrame();
         cursoFrame.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCursosActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    /**
+     * Evendo que redireciona para a pagina de Matriculas
+     * @param evt 
+     */
+    private void btnMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriculasActionPerformed
         MatriculaFrame matriculaFrame = new MatriculaFrame();
         matriculaFrame.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnMatriculasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,8 +174,8 @@ public class HomeFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlunos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCursos;
+    private javax.swing.JButton btnMatriculas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

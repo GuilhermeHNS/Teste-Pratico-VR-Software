@@ -10,10 +10,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
+ * Classe de Conexão com o Banco de Dados
  * @author guilh
  */
 public class Conexao {
+    /**
+     * Metodo que abre a conexão com o Banco de dados
+     * @return Conexão MySql
+     * @throws SQLException 
+     */
     public Connection getConnection() throws SQLException{
         String driver = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/vrsoftware";

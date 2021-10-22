@@ -11,12 +11,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
- *
+ * Classe que executa querys do Aluno
  * @author guilh
  */
 public class AlunoDAO {
     Connection con = null;
     
+    /**
+     * Metodo que executa o cadastro de um Aluno
+     * @param al
+     * @return um <code>boolean</code> representando o resultado do cadastro
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public boolean insereAluno(Aluno al) throws SQLException, ClassNotFoundException{
         boolean inseriu = false;
         try{
@@ -37,6 +44,12 @@ public class AlunoDAO {
     }
     
     
+    /**
+     * Metodo que executa a alteração de dados de um Aluno
+     * @param al
+     * @return um <code>boolean</code> representando o resultado da alteração
+     * @throws SQLException 
+     */
     public boolean alteraDados(Aluno al) throws SQLException{
         boolean alterou = false;
         
@@ -59,6 +72,13 @@ public class AlunoDAO {
         return alterou;
     }
     
+    /**
+     * Metodo que executa a exclusão de um aluno
+     * @param al
+     * @return um <code>boolean</code> representando o resultado da exclusão
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public boolean excluir(Aluno al) throws SQLException, ClassNotFoundException{
         boolean excluiu = false;
         try{
@@ -80,6 +100,13 @@ public class AlunoDAO {
         return excluiu;
     }
     
+    /**
+     * Metodo que verifica a existencia de um aluno e retorna os dados caso encontrado
+     * @param id
+     * @return um <code>ArrayList</code> com os dados do aluno encontrado
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public ArrayList<Aluno> verificaId(int id) throws SQLException, ClassNotFoundException{
         ArrayList<Aluno> aluno = new ArrayList();
         ResultSet rs = null;
@@ -107,29 +134,12 @@ public class AlunoDAO {
         return aluno;
     }
     
-    public boolean verificaSeAlunoExiste(int idAluno) throws SQLException, ClassNotFoundException{
-        boolean existe = false;
-        ResultSet rs = null;
-        try{
-            con = new Conexao().getConnection();
-            String sql = "SELECT * FROM aluno WHERE idaluno = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, idAluno);
-            rs = stmt.executeQuery();
-            if(rs.next())
-                existe = true;
-            stmt.close();
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
-        finally{
-            con.close();
-        }
-        
-        return existe;
-    }
-    
+    /**
+     * Metodo que lista todos os alunos cadastrados no banco de dados
+     * @return um <code>ArrayList</code> com todos os alunos cadastrados
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public ArrayList<Aluno> buscaTodosAlunos() throws SQLException, ClassNotFoundException{
         ArrayList<Aluno> lista = new ArrayList();
         ResultSet rs;

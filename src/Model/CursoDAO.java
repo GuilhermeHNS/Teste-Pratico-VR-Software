@@ -11,16 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 /**
- *
+ * Classe que executa as querys do Curso
  * @author guilh
  */
 public class CursoDAO {
     Connection con = null;
     
     /**
-     *
+     * Metodo que executa o cadastro de um Curso
      * @param cs
-     * @return
+     * @return um <code>boolean</code> representando o resultado do cadastro
      * @throws SQLException
      * @throws ClassNotFoundException
      */
@@ -47,6 +47,12 @@ public class CursoDAO {
     
     }
     
+    /**
+     * Metodo que executa a alteração de dados do Curso
+     * @param cs
+     * @return um <code>boolean</code> representando o resultado da alteração
+     * @throws SQLException 
+     */
     public boolean alteraDados(Curso cs) throws SQLException{
         boolean alterou = false;
         
@@ -71,6 +77,13 @@ public class CursoDAO {
         return alterou;
     }
     
+    /**
+     * Metodo que executa a exclusão de um Curso
+     * @param cs
+     * @return um <code>boolean</code> representando o resultado da exclusão
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public boolean excluir(Curso cs) throws SQLException, ClassNotFoundException{
         boolean excluiu = false;
         try{
@@ -92,6 +105,13 @@ public class CursoDAO {
         return excluiu;
     }
     
+    /**
+     * Metodo que verifica a existencia de um Curso e retorna os dados caso encontrado
+     * @param id
+     * @return um <code>ArrayList</code> com os dados do Curso
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public ArrayList<Curso> verificaId(int id) throws SQLException, ClassNotFoundException{
         ArrayList<Curso> resultCurso = new ArrayList();
         ResultSet rs = null;
@@ -120,6 +140,12 @@ public class CursoDAO {
         return resultCurso;
     }
     
+    /**
+     * Metodo que lista todos os cursos cadastrados
+     * @return um <code>ArrayList</code> com todos os cursos cadastrados
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public ArrayList<Curso> buscaTodosCursos() throws SQLException, ClassNotFoundException{
         ArrayList<Curso> lista = new ArrayList();
         ResultSet rs;

@@ -6,8 +6,8 @@
 package View;
 
 import Controller.ControllerAluno;
+import Controller.ControllerCursoAluno;
 import Model.Aluno;
-import Model.AlunoDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * View de Aluno
  * @author guilh
  */
 public class AlunoFrame extends javax.swing.JFrame {
@@ -24,10 +24,13 @@ public class AlunoFrame extends javax.swing.JFrame {
     /**
      * Creates new form AlunoFrame
      */
-    ControllerAluno ctrlAl = new ControllerAluno();
+    ControllerAluno ctrlAl;
+    ControllerCursoAluno ctrlCa;
     int codigoAluno;
     HomeFrame homeFrame = new HomeFrame();
     public AlunoFrame() {
+        this.ctrlCa = new ControllerCursoAluno();
+        this.ctrlAl = new ControllerAluno();
         initComponents();
         txtAlterarNome.setVisible(false);
         labelNovoNome.setVisible(false);
@@ -50,10 +53,10 @@ public class AlunoFrame extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtNomeAluno = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
+        btnVoltaMenu = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -64,22 +67,22 @@ public class AlunoFrame extends javax.swing.JFrame {
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         labelNovoNome = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnVoltaMenu2 = new javax.swing.JButton();
         labelNomeAluno = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaAlunos = new javax.swing.JTable();
         btnListaAlunos = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnVoltaMenu3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(710, 408));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel1.setText("Cadastro");
-
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel2.setText("Nome:");
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,49 +91,55 @@ public class AlunoFrame extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setText("Voltar para o menu");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltaMenu.setText("Voltar para o menu");
+        btnVoltaMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
+                btnVoltaMenuActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Nome:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(246, 246, 246)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVoltaMenu)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 232, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVoltar)))
-                .addContainerGap(251, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(237, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnVoltar)
-                .addGap(10, 10, 10)
+                .addComponent(btnVoltaMenu)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCadastrar)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addGap(231, 231, 231))
         );
 
         jTabbedPane1.addTab("Cadastro", jPanel1);
@@ -168,10 +177,10 @@ public class AlunoFrame extends javax.swing.JFrame {
         labelNovoNome.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         labelNovoNome.setText("Digite o novo nome");
 
-        jButton1.setText("Voltar para o menu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltaMenu2.setText("Voltar para o menu");
+        btnVoltaMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVoltaMenu2ActionPerformed(evt);
             }
         });
 
@@ -184,61 +193,61 @@ public class AlunoFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(292, 292, 292)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIDAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelNovoNome)
+                        .addGap(6, 6, 6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(247, 247, 247)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                    .addComponent(txtIDAluno, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGap(281, 281, 281))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(223, 223, 223))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(labelNome)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtAlterarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(265, 265, 265))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(45, 45, 45)
-                            .addComponent(labelNovoNome)
-                            .addContainerGap()))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnVoltaMenu2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelNomeAluno)
-                        .addGap(320, 320, 320))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labelNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtAlterarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(265, 265, 265))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 247, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(223, 223, 223))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelNomeAluno)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnVoltaMenu2)
                 .addGap(8, 8, 8)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtIDAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(btnBuscar)
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelNomeAluno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(22, 22, 22)
                 .addComponent(labelNovoNome)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtAlterarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelNome))
@@ -281,10 +290,10 @@ public class AlunoFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Voltar para o menu");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltaMenu3.setText("Voltar para o menu");
+        btnVoltaMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVoltaMenu3ActionPerformed(evt);
             }
         });
 
@@ -296,12 +305,12 @@ public class AlunoFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(101, 101, 101)
+                        .addComponent(btnVoltaMenu3)
+                        .addGap(56, 56, 56)
                         .addComponent(jLabel5)
-                        .addContainerGap(123, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 124, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,12 +328,12 @@ public class AlunoFrame extends javax.swing.JFrame {
                         .addComponent(jLabel5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2)))
+                        .addComponent(btnVoltaMenu3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListaAlunos)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Listagem de Alunos", jPanel3);
@@ -333,16 +342,20 @@ public class AlunoFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento de click do botão que requisita ao Controller o cadastro de um aluno
+     * @param evt 
+     */
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if(txtNomeAluno.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Digite o nome do aluno");
@@ -352,9 +365,7 @@ public class AlunoFrame extends javax.swing.JFrame {
             boolean inseriu = false;
             try {
                 inseriu = ctrlAl.insereAluno(nome);
-            } catch (SQLException ex) {
-                Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -368,11 +379,19 @@ public class AlunoFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
+    private void btnVoltaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenuActionPerformed
         homeFrame.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnVoltarActionPerformed
+    }//GEN-LAST:event_btnVoltaMenuActionPerformed
 
+    /**
+     * Evento de click do botão que requisita ao controller a verificação da existencia de um Aluno
+     * @param evt 
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         ArrayList<Aluno> resultAluno = new ArrayList();
         if(txtIDAluno.getText().isEmpty()){
@@ -408,32 +427,70 @@ public class AlunoFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Evento de click do botão que requisita a exclusão de um Aluno
+     * @param evt 
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir o aluno?");
         boolean excluiu = false;
+        boolean possuiMatriculas = false;
+        
         if(resposta == 0){
-            System.out.println("Aceitou excluir o aluno");
             try {
-                excluiu = ctrlAl.excluiuAluno(codigoAluno);
-            } catch (SQLException ex) {
-                Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+                possuiMatriculas = ctrlCa.verificaSeEstaCadastrado(codigoAluno);
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            if(excluiu)
-                JOptionPane.showMessageDialog(null, "Aluno excluido com sucesso!");
-                txtAlterarNome.setVisible(false);
-                labelNovoNome.setVisible(false);
-                labelNome.setVisible(false);
-                btnAlterar.setVisible(false);
-                btnExcluir.setVisible(false);
-                txtIDAluno.setText("");
-                labelNomeAluno.setVisible(false);
+            if(possuiMatriculas){
+                resposta = JOptionPane.showConfirmDialog(this, "O aluno está matriculado em um curso e sua matricula irá ser removida. Deseja continuar?");
+                if(resposta == 0){
+                    try {
+                        ctrlCa.excluiuCursoAluno(codigoAluno);
+                        excluiu = ctrlAl.excluiuAluno(codigoAluno);
+                    } catch (SQLException | ClassNotFoundException ex) {
+                        Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    if(excluiu){
+                        JOptionPane.showMessageDialog(null, "Aluno excluido com sucesso!");
+                        txtAlterarNome.setVisible(false);
+                        labelNovoNome.setVisible(false);
+                        labelNome.setVisible(false);
+                        btnAlterar.setVisible(false);
+                        btnExcluir.setVisible(false);
+                        txtIDAluno.setText("");
+                        labelNomeAluno.setVisible(false);
+                    }
+                }
+                
+            }else{
+                try {
+                    excluiu = ctrlAl.excluiuAluno(codigoAluno);
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(excluiu){
+                    JOptionPane.showMessageDialog(null, "Aluno excluido com sucesso!");
+                    txtAlterarNome.setVisible(false);
+                    labelNovoNome.setVisible(false);
+                    labelNome.setVisible(false);
+                    btnAlterar.setVisible(false);
+                    btnExcluir.setVisible(false);
+                    txtIDAluno.setText("");
+                    labelNomeAluno.setVisible(false);
+                }                
+            }
+                
         }
         
     }//GEN-LAST:event_btnExcluirActionPerformed
-
+    
+    /**
+     * Evento de click do botão que requisita ao controller a alteração de dados do Aluno
+     * @param evt 
+     */
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         if(txtAlterarNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Digite o novo nome que o aluno irá receber!");
@@ -446,10 +503,7 @@ public class AlunoFrame extends javax.swing.JFrame {
                 try{
                     alterou = ctrlAl.alterarDados(codigoAluno, novoNome);
                 }
-                catch(SQLException ex){
-                    Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                catch(ClassNotFoundException ex){
+                catch(SQLException | ClassNotFoundException ex){
                     Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
@@ -467,6 +521,10 @@ public class AlunoFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    /**
+     * Evento de click do botão que requisita ao controller a listagem dos Alunos
+     * @param evt 
+     */
     private void btnListaAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAlunosActionPerformed
         ArrayList<Aluno> listaAlunos;
         
@@ -481,16 +539,24 @@ public class AlunoFrame extends javax.swing.JFrame {
             Logger.getLogger(AlunoFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnListaAlunosActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
+    private void btnVoltaMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenu2ActionPerformed
         homeFrame.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVoltaMenu2ActionPerformed
+    
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
+    private void btnVoltaMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenu3ActionPerformed
         homeFrame.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVoltaMenu3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,9 +599,9 @@ public class AlunoFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnListaAlunos;
-    private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnVoltaMenu;
+    private javax.swing.JButton btnVoltaMenu2;
+    private javax.swing.JButton btnVoltaMenu3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

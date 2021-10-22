@@ -6,6 +6,7 @@
 package View;
 
 import Controller.ControllerCurso;
+import Controller.ControllerCursoAluno;
 import Model.Curso;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * View de Curso
  * @author guilh
  */
 public class CursoFrame extends javax.swing.JFrame {
@@ -24,6 +25,7 @@ public class CursoFrame extends javax.swing.JFrame {
      * Creates new form Curso
      */
     ControllerCurso ctrlCs = new ControllerCurso();
+    ControllerCursoAluno ctrlCa = new ControllerCursoAluno();
     HomeFrame homeFrame = new HomeFrame();
     int codigoCurso;
     public CursoFrame() {
@@ -69,15 +71,16 @@ public class CursoFrame extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         labelDescricaoCurso = new javax.swing.JLabel();
         labelEmentaCurso = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnVoltaMenu2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaCursos = new javax.swing.JTable();
         btnListarCursos = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnVoltaMenu3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -199,10 +202,10 @@ public class CursoFrame extends javax.swing.JFrame {
         labelEmentaCurso.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         labelEmentaCurso.setText("jLabel9");
 
-        jButton1.setText("Voltar para o menu");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltaMenu2.setText("Voltar para o menu");
+        btnVoltaMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVoltaMenu2ActionPerformed(evt);
             }
         });
 
@@ -232,12 +235,6 @@ public class CursoFrame extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addComponent(btnBuscaId)
                             .addGap(330, 330, 330)))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelEmentaCurso)
-                    .addComponent(labelDescricaoCurso))
-                .addGap(346, 346, 346))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -247,14 +244,20 @@ public class CursoFrame extends javax.swing.JFrame {
                             .addComponent(txtIdCurso)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)))
+                        .addComponent(btnVoltaMenu2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEmentaCurso)
+                    .addComponent(labelDescricaoCurso))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnVoltaMenu2)
                 .addGap(15, 15, 15)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -263,11 +266,11 @@ public class CursoFrame extends javax.swing.JFrame {
                 .addComponent(txtIdCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(btnBuscaId)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(labelDescricaoCurso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(labelEmentaCurso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelEmentaCurso)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescricao)
                     .addComponent(txtNovaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -315,10 +318,10 @@ public class CursoFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Voltar para o menu");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltaMenu3.setText("Voltar para o menu");
+        btnVoltaMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVoltaMenu3ActionPerformed(evt);
             }
         });
 
@@ -339,14 +342,14 @@ public class CursoFrame extends javax.swing.JFrame {
                         .addComponent(btnListarCursos))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2)))
+                        .addComponent(btnVoltaMenu3)))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(btnVoltaMenu3)
                 .addGap(16, 16, 16)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,7 +365,7 @@ public class CursoFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,6 +375,10 @@ public class CursoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento de click do botão que requisita ao Controller o cadastro de um curso
+     * @param evt 
+     */
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if(txtDescricao.getText().isEmpty() || txtEmenta.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
@@ -383,9 +390,7 @@ public class CursoFrame extends javax.swing.JFrame {
             
             try {
                 inseriu = ctrlCs.insereCurso(descricao, ementa);
-            } catch (SQLException ex) {
-                Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -396,76 +401,113 @@ public class CursoFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
+    
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
     private void btnVoltaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenuActionPerformed
         homeFrame.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltaMenuActionPerformed
 
-    private void btnBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaIdActionPerformed
-        ArrayList<Curso> resultCurso = new ArrayList();
+    /**
+     * Evento de click do botão que requisita ao controller a listagem dos Cursos
+     * @param evt 
+     */
+    private void btnListarCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarCursosActionPerformed
+        ArrayList<Curso> listaCursos;
         
-        if(txtIdCurso.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Digite o codigo do curso!");
+        try{
+            listaCursos = ctrlCs.listar();
+            DefaultTableModel dados = (DefaultTableModel) tabelaCursos.getModel();
+            dados.setNumRows(0);
+            for(Curso cs: listaCursos){
+                dados.addRow(new Object[]{cs.getCodigo(), cs.getDescricao(), cs.getEmenta()});
+            }
         }
-        else{
-            int idCurso = Integer.parseInt(txtIdCurso.getText());
+        catch(SQLException | ClassNotFoundException ex){
+            Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnListarCursosActionPerformed
+    
+   
+    /**
+     * Evendo de click do botão para voltar ao menu
+     * @param evt 
+     */
+    private void btnVoltaMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenu3ActionPerformed
+        homeFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVoltaMenu3ActionPerformed
+
+    /**
+     * Evento de click do botão que requisita a exclusão de um Curso
+     * @param evt 
+     */
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir o curso?");
+        boolean excluiu = false;
+        boolean possuiMatriculas = false;
+        if(resposta == 0){
+            
             try {
-                resultCurso = ctrlCs.verificaId(idCurso);
+                possuiMatriculas = ctrlCa.verificaSeCursoEstaCadastrado(codigoCurso);
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            if(!resultCurso.isEmpty()){
-                for(Curso cs: resultCurso){
-                    labelDescricaoCurso.setText("Descricao: " + cs.getDescricao());
-                    labelEmentaCurso.setText("Ementa: " + cs.getEmenta());
+            if(possuiMatriculas){
+                resposta = JOptionPane.showConfirmDialog(this, "O curso possui matriculas que serão apagadas. Deseja continuar?");
+                
+                if(resposta == 0){
+                    try {
+                        ctrlCa.excluiuCursos(codigoCurso);
+                        excluiu = ctrlCs.excluiuCurso(codigoCurso);
+                    } catch (SQLException | ClassNotFoundException ex) {
+                        Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    if(excluiu){
+                        JOptionPane.showMessageDialog(null, "Curso excluido com sucesso!");
+                        labelEmenta.setVisible(false);
+                        labelDescricao.setVisible(false);
+                        txtNovaDescricao.setVisible(false);
+                        txtNovaEmenta.setVisible(false);
+                        labelEmentaCurso.setVisible(false);
+                        labelDescricaoCurso.setVisible(false);
+                        btnAlterar.setVisible(false);
+                        btnExcluir.setVisible(false);
+                        txtIdCurso.setText("");
+                    }
                 }
-                codigoCurso = idCurso;
-                labelEmenta.setVisible(true);
-                labelDescricao.setVisible(true);
-                txtNovaDescricao.setVisible(true);
-                txtNovaEmenta.setVisible(true);
-                labelEmentaCurso.setVisible(true);
-                labelDescricaoCurso.setVisible(true);
-                btnAlterar.setVisible(true);
-                btnExcluir.setVisible(true); 
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Curso não encontrado!");
+            
+            try {
+                excluiu = ctrlCs.excluiuCurso(codigoCurso);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if(excluiu){
+                JOptionPane.showMessageDialog(null, "Curso excluido com sucesso!");
+                labelEmenta.setVisible(false);
+                labelDescricao.setVisible(false);
+                txtNovaDescricao.setVisible(false);
+                txtNovaEmenta.setVisible(false);
+                labelEmentaCurso.setVisible(false);
+                labelDescricaoCurso.setVisible(false);
+                btnAlterar.setVisible(false);
+                btnExcluir.setVisible(false);
                 txtIdCurso.setText("");
             }
         }
-    }//GEN-LAST:event_btnBuscaIdActionPerformed
-
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-       int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir o curso?");
-       boolean excluiu = false;
-       
-       if(resposta == 0){
-           try {
-               excluiu = ctrlCs.excluiuCurso(codigoCurso);
-           } catch (SQLException ex) {
-               Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
-           } catch (ClassNotFoundException ex) {
-               Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
-           if(excluiu){
-               JOptionPane.showMessageDialog(null, "Curso excluido com sucesso!");
-               labelEmenta.setVisible(false);
-               labelDescricao.setVisible(false);
-               txtNovaDescricao.setVisible(false);
-               txtNovaEmenta.setVisible(false);
-               labelEmentaCurso.setVisible(false);
-               labelDescricaoCurso.setVisible(false);
-               btnAlterar.setVisible(false);
-               btnExcluir.setVisible(false);
-               txtIdCurso.setText("");
-           }
-       }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    /**
+     * Evento de click do botão que requisita ao controller a alteração de dados do Curso
+     * @param evt 
+     */
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         if(txtNovaDescricao.getText().isEmpty() || txtNovaEmenta.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Digite os novos dados do curso!");
@@ -476,7 +518,7 @@ public class CursoFrame extends javax.swing.JFrame {
                 boolean alterou = false;
                 String novaDescricao = txtNovaDescricao.getText();
                 String novaEmenta = txtNovaEmenta.getText();
-                
+
                 try {
                     alterou = ctrlCs.alterarDados(codigoCurso, novaDescricao, novaEmenta);
                 } catch (SQLException ex) {
@@ -484,7 +526,7 @@ public class CursoFrame extends javax.swing.JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 //VERIFICAÇÃO DO UPDATE DE CURSO
                 if(alterou){
                     //EXIBINDO MENSAGEM PARA O USUARIO
@@ -506,31 +548,50 @@ public class CursoFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void btnListarCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarCursosActionPerformed
-        ArrayList<Curso> listaCursos;
-        
-        try{
-            listaCursos = ctrlCs.listar();
-            DefaultTableModel dados = (DefaultTableModel) tabelaCursos.getModel();
-            dados.setNumRows(0);
-            for(Curso cs: listaCursos){
-                dados.addRow(new Object[]{cs.getCodigo(), cs.getDescricao(), cs.getEmenta()});
+    /**
+     * Evento de click do botão que requisita ao controller a verificação da existencia de um Curso
+     * @param evt 
+     */
+    private void btnBuscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaIdActionPerformed
+        ArrayList<Curso> resultCurso = new ArrayList();
+
+        if(txtIdCurso.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Digite o codigo do curso!");
+        }
+        else{
+            int idCurso = Integer.parseInt(txtIdCurso.getText());
+            try {
+                resultCurso = ctrlCs.verificaId(idCurso);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if(!resultCurso.isEmpty()){
+                for(Curso cs: resultCurso){
+                    labelDescricaoCurso.setText("Descricao: " + cs.getDescricao());
+                    labelEmentaCurso.setText("Ementa: " + cs.getEmenta());
+                }
+                codigoCurso = idCurso;
+                labelEmenta.setVisible(true);
+                labelDescricao.setVisible(true);
+                txtNovaDescricao.setVisible(true);
+                txtNovaEmenta.setVisible(true);
+                labelEmentaCurso.setVisible(true);
+                labelDescricaoCurso.setVisible(true);
+                btnAlterar.setVisible(true);
+                btnExcluir.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Curso não encontrado!");
+                txtIdCurso.setText("");
             }
         }
-        catch(SQLException | ClassNotFoundException ex){
-            Logger.getLogger(CursoFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnListarCursosActionPerformed
+    }//GEN-LAST:event_btnBuscaIdActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnVoltaMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltaMenu2ActionPerformed
         homeFrame.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        homeFrame.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVoltaMenu2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -575,8 +636,8 @@ public class CursoFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnListarCursos;
     private javax.swing.JButton btnVoltaMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnVoltaMenu2;
+    private javax.swing.JButton btnVoltaMenu3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
