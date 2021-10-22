@@ -20,6 +20,11 @@ public class CursoAluno {
         this.codigoCurso = codigoCurso;
     }
 
+    public CursoAluno(int codigoAluno, int codigoCurso) {
+        this.codigoAluno = codigoAluno;
+        this.codigoCurso = codigoCurso;
+    }
+    
     public CursoAluno(){}
     
     public int getCodigo() {

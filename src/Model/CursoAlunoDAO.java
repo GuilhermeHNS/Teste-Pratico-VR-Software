@@ -4,30 +4,34 @@
  * and open the template in the editor.
  */
 package Model;
+
 import Connection.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  *
  * @author guilh
  */
-public class AlunoDAO {
+public class CursoAlunoDAO {
     Connection con = null;
     
-    public boolean insereAluno(Aluno al) throws SQLException, ClassNotFoundException{
+    public boolean matriculaAlunoCurso(int idAluno, int idCurso) throws SQLException, ClassNotFoundException{
         boolean inseriu = false;
         try{
             con = new Conexao().getConnection();
-            String sql = "INSERT INTO aluno (nome) VALUES (?)";
+            String sql = "INSERT INTO curso_aluno (idaluno, idCurso) VALUES (?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1,al.getNome());
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, idCurso);
             stmt.execute();
             stmt.close();
             inseriu = true;
-        }catch(Exception ex){
+        }
+        catch(Exception ex){
             ex.printStackTrace();
         }
         finally{
@@ -36,36 +40,13 @@ public class AlunoDAO {
         return inseriu;
     }
     
-    
-    public boolean alteraDados(Aluno al) throws SQLException{
-        boolean alterou = false;
-        
-        try{
-            con = new Conexao().getConnection();
-            String sql = "UPDATE aluno SET nome = ? WHERE idaluno = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, al.getNome());
-            stmt.setInt(2, al.getCodigo());
-            stmt.execute();
-            stmt.close();
-            alterou = true;
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
-        finally{
-            con.close();
-        }
-        return alterou;
-    }
-    
-    public boolean excluir(Aluno al) throws SQLException, ClassNotFoundException{
+    public boolean excluir(int idCursoAluno) throws SQLException, ClassNotFoundException{
         boolean excluiu = false;
         try{
             con = new Conexao().getConnection();
-            String sql = "DELETE FROM aluno WHERE idaluno = ?";
+            String sql = "DELETE FROM curso_aluno WHERE idcurso_aluno = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, al.getCodigo());
+            stmt.setInt(1, idCursoAluno);
             stmt.execute();
             stmt.close();
             excluiu = true;
@@ -80,41 +61,14 @@ public class AlunoDAO {
         return excluiu;
     }
     
-    public ArrayList<Aluno> verificaId(int id) throws SQLException, ClassNotFoundException{
-        ArrayList<Aluno> aluno = new ArrayList();
-        ResultSet rs = null;
-        try{
-            con = new Conexao().getConnection();
-            String sql = "SELECT * FROM aluno WHERE idaluno = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-            while(rs.next()){
-                String nome = rs.getString("nome");
-                
-                Aluno al = new Aluno(nome);
-                aluno.add(al);
-            }
-            stmt.close();
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
-        finally{
-            con.close();
-        }
-        
-        return aluno;
-    }
-    
-    public boolean verificaSeAlunoExiste(int idAluno) throws SQLException, ClassNotFoundException{
+    public boolean verificaIdCursoAluno(int idCursoAluno) throws SQLException, ClassNotFoundException{
         boolean existe = false;
         ResultSet rs = null;
         try{
             con = new Conexao().getConnection();
-            String sql = "SELECT * FROM aluno WHERE idaluno = ?";
+            String sql = "SELECT * FROM curso_aluno WHERE idcurso_aluno = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, idAluno);
+            stmt.setInt(1, idCursoAluno);
             rs = stmt.executeQuery();
             if(rs.next())
                 existe = true;
@@ -130,21 +84,70 @@ public class AlunoDAO {
         return existe;
     }
     
-    public ArrayList<Aluno> buscaTodosAlunos() throws SQLException, ClassNotFoundException{
-        ArrayList<Aluno> lista = new ArrayList();
+    public boolean verificaAlunoECurso(int idAluno, int idCurso) throws SQLException, ClassNotFoundException{
+        boolean existe = false;
+        ResultSet rs = null;
+        try{
+            con = new Conexao().getConnection();
+            String sql = "SELECT idcurso, idaluno FROM curso JOIN aluno WHERE idcurso LIKE ? AND idaluno LIKE ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idCurso);
+            stmt.setInt(2, idAluno);
+            rs = stmt.executeQuery();
+            if(rs.next())
+                existe = true;
+            stmt.close();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        finally{
+            con.close();
+        }
+        System.out.println(existe);
+        return existe;
+    }
+    public boolean verificaSeEstaCadastrado(int idAluno, int idCurso) throws SQLException, ClassNotFoundException{
+        boolean existe = false;
+        ResultSet rs = null;
+        try{
+            con = new Conexao().getConnection();
+            String sql = "SELECT idcurso_aluno FROM curso_aluno WHERE idcurso LIKE ? AND idaluno LIKE ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idCurso);
+            stmt.setInt(2, idAluno);
+            rs = stmt.executeQuery();
+            if(rs.next())
+                existe = true;
+            stmt.close();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        finally{
+            con.close();
+        }
+        
+        return existe;
+    }
+    
+    
+    public ArrayList<CursoAluno> buscaTodasMatriculas() throws SQLException, ClassNotFoundException{
+        ArrayList<CursoAluno> lista = new ArrayList();
         ResultSet rs;
         try{
             con = new Conexao().getConnection();
-            String sql = "SELECT * FROM aluno";
+            String sql = "SELECT * FROM curso_aluno";
             PreparedStatement stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             
             while(rs.next()){
+                int idCursoAluno = rs.getInt("idcurso_aluno");
                 int idAluno = rs.getInt("idaluno");
-                String nome = rs.getString("nome");
+                int idCurso = rs.getInt("idcurso");
                 
-                Aluno al = new Aluno(idAluno, nome);
-                lista.add(al);
+                CursoAluno cursoAluno = new CursoAluno(idCursoAluno, idAluno, idCurso);
+                lista.add(cursoAluno);
             }
             stmt.close();
         }
