@@ -261,7 +261,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
-                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnListaMatriculas" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="135" max="32767" attributes="0"/>
@@ -276,7 +276,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnListaMatriculas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -298,11 +298,11 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="tabelaMatriculas">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="3" rowCount="4">
-                        <Column editable="false" title="ID Turma" type="java.lang.Object"/>
+                        <Column editable="false" title="ID Matricula" type="java.lang.Object"/>
                         <Column editable="false" title="ID Aluno" type="java.lang.Object"/>
                         <Column editable="false" title="ID Curso" type="java.lang.Object"/>
                       </Table>
@@ -333,10 +333,13 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="btnListaMatriculas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Listar todas as turmas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListaMatriculasActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

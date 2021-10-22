@@ -6,10 +6,13 @@
 package View;
 
 import Controller.ControllerCursoAluno;
+import Model.CursoAluno;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -54,8 +57,8 @@ public class MatriculaFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
+        tabelaMatriculas = new javax.swing.JTable();
+        btnListaMatriculas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,7 +186,7 @@ public class MatriculaFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         jLabel8.setText("Listagem");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaMatriculas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -191,7 +194,7 @@ public class MatriculaFrame extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID Turma", "ID Aluno", "ID Curso"
+                "ID Matricula", "ID Aluno", "ID Curso"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -202,9 +205,14 @@ public class MatriculaFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaMatriculas);
 
-        jButton5.setText("Listar todas as turmas");
+        btnListaMatriculas.setText("Listar todas as turmas");
+        btnListaMatriculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaMatriculasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -220,7 +228,7 @@ public class MatriculaFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(275, 275, 275)
-                        .addComponent(jButton5)))
+                        .addComponent(btnListaMatriculas)))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -231,7 +239,7 @@ public class MatriculaFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(btnListaMatriculas)
                 .addContainerGap(191, Short.MAX_VALUE))
         );
 
@@ -345,6 +353,23 @@ public class MatriculaFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnListaMatriculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaMatriculasActionPerformed
+        ArrayList<CursoAluno> listaMatriculas;
+        
+        try {
+            listaMatriculas = ctrlCa.listar();
+            DefaultTableModel dados = (DefaultTableModel) tabelaMatriculas.getModel();
+            dados.setNumRows(0);
+            
+            for(CursoAluno ca: listaMatriculas){
+                dados.addRow(new Object[]{ca.getCodigo(), ca.getCodigoAluno(), ca.getCodigoCurso()});
+            }
+           
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(MatriculaFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnListaMatriculasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -390,8 +415,8 @@ public class MatriculaFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnListaMatriculas;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -403,8 +428,8 @@ public class MatriculaFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelMatriculaEncontrada;
+    private javax.swing.JTable tabelaMatriculas;
     private javax.swing.JTextField txtIdAluno;
     private javax.swing.JTextField txtIdCurso;
     private javax.swing.JTextField txtIdMatricula;
